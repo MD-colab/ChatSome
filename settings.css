@@ -1,0 +1,211 @@
+/* settings.css (Specific styles for settings.html) */
+
+/* General layout for settings page */
+.settings-page .app-container {
+    flex-direction: column; /* Stack header and content vertically */
+    /* Shared styles from style.css for app-container already apply */
+}
+
+/* Header for settings page */
+.settings-page .settings-header {
+    background: linear-gradient(135deg, var(--header-bg-gradient-start) 0%, var(--header-bg-gradient-end) 100%);
+    color: var(--header-text-color);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    width: 100%; /* Take full width of app-container */
+}
+
+.settings-page .settings-header h2 {
+    flex-grow: 1; /* Center the title */
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.settings-page .settings-header .icon-btn {
+    color: var(--header-text-color); /* Ensure consistent color for header icons */
+}
+
+/* Main content area for settings */
+.settings-page .settings-content {
+    flex: 1; /* Allows content to take available space */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    padding: 30px; /* Base padding for desktop */
+    background: var(--chat-area-bg); /* Use chat area background for consistency */
+}
+
+/* Individual setting sections */
+.settings-content .setting-section {
+    background: var(--modal-bg); /* Background for sections */
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px; /* Space between sections */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.settings-content .setting-section h3 {
+    color: var(--modal-header-color); /* Title color */
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--sidebar-border); /* Separator */
+    padding-bottom: 10px;
+}
+
+/* Individual setting items */
+.settings-content .setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px; /* Space between items within a section */
+}
+
+.settings-content .setting-item:last-child {
+    margin-bottom: 0; /* No bottom margin for the last item in a section */
+}
+
+.settings-content .setting-item span {
+    font-weight: 600;
+    color: var(--chat-name-color); /* Label color */
+    font-size: 1.1rem;
+}
+
+/* Theme switcher buttons */
+.settings-content .theme-switcher {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px; /* Space from label */
+}
+
+.settings-content .theme-switcher .theme-btn {
+    flex: 1; /* Make buttons take equal width */
+    padding: 10px 15px;
+    border: 1px solid var(--sidebar-border);
+    border-radius: 8px;
+    background: var(--input-container-bg); /* Background for inactive buttons */
+    color: var(--chat-name-color);
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.settings-content .theme-switcher .theme-btn:hover {
+    background: var(--user-item-bg-hover);
+}
+
+.settings-content .theme-switcher .theme-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.settings-content .theme-switcher .theme-btn.active i {
+    color: white; /* Active icon color */
+}
+
+.settings-content .theme-switcher .theme-btn i {
+    color: var(--chat-options-menu-item-icon); /* Inactive icon color */
+}
+
+/* Text input for status message */
+.settings-content input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--settings-input-border);
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--settings-input-bg);
+    color: var(--message-input-color);
+}
+
+.settings-content input[type="text"]:focus {
+    outline: none;
+    border-color: var(--settings-input-focus-border);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.settings-content input[type="text"]::placeholder {
+    color: var(--chat-preview-color);
+}
+
+/* Save button */
+.settings-content .save-btn {
+    padding: 10px 20px;
+    background: var(--save-btn-bg);
+    color: var(--save-btn-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content; /* Make button only as wide as its content */
+    margin-top: 10px; /* Space from input */
+}
+.settings-content .save-btn:hover {
+    background: var(--save-btn-hover-bg);
+}
+
+/* Logout button */
+.settings-content .settings-logout-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--profile-action-danger-bg); /* Use danger color from global theme */
+    color: var(--profile-action-danger-color);
+    border: 1px solid var(--profile-action-danger-border);
+    margin-top: 20px;
+}
+.settings-content .settings-logout-btn:hover {
+    background: var(--profile-action-danger-hover-bg);
+}
+
+/* Mobile adjustments (inherited from global style.css) */
+/*
+@media (max-width: 768px) {
+    .settings-page .app-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        width: 100vw;
+    }
+    .settings-page .settings-content {
+        padding: 20px;
+    }
+    .settings-content .setting-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    .settings-content .setting-section h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    .settings-content .setting-item span {
+        font-size: 1rem;
+    }
+    .settings-content .theme-switcher .theme-btn {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .settings-content input[type="text"],
+    .settings-content .save-btn,
+    .settings-content .settings-logout-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+*/

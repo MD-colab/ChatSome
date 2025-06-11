@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chat Some - Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to your common CSS file -->
+</head>
+<body class="settings-page">
+    <div class="app-container">
+        <div class="settings-header">
+            <button class="icon-btn back-btn" id="backToProfileOrChatsBtn"><i class="fas fa-arrow-left"></i></button>
+            <h2>Settings</h2>
+        </div>
+
+        <div class="settings-content">
+            <div class="setting-section">
+                <h3>App Theme</h3>
+                <div class="theme-switcher">
+                    <button class="theme-btn" id="lightThemeBtn">
+                        <i class="fas fa-sun"></i> Light
+                    </button>
+                    <button class="theme-btn" id="darkThemeBtn">
+                        <i class="fas fa-moon"></i> Dark
+                    </button>
+                </div>
+            </div>
+
+            <div class="setting-section">
+                <h3>Profile</h3>
+                <div class="setting-item">
+                    <span>Status Message</span>
+                    <input type="text" id="statusMessageInput" placeholder="Set your status message...">
+                    <button class="save-btn" id="saveStatusMessageBtn"><i class="fas fa-check"></i> Save</button>
+                </div>
+                <!-- Future additions: Change Name, Change Email, Change Password, Change Avatar -->
+            </div>
+
+            <div class="setting-section">
+                <h3>Account</h3>
+                <button class="settings-logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs (compat version for global firebase namespace) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <!-- Main application logic for settings.html -->
+    <script src="settings.js" defer></script>
+    <script src="utils.js" defer></script>
+</body>
+</html>

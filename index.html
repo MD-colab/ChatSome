@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chat Some - Chats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to your common CSS file -->
+</head>
+<body class="index-page">
+    <div class="app-container">
+        <!-- Sidebar (which is the main view for index.html on mobile) -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="user-info" id="sidebarUserInfo">
+                    <div class="avatar" id="currentUserAvatar"></div>
+                    <span id="currentUserName">Loading...</span>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" id="newChatBtn" title="New Chat"><i class="fas fa-plus"></i></button>
+                    <button class="icon-btn" id="moreOptionsBtn" title="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+                <!-- More Options Menu -->
+                <div id="moreOptionsMenu" class="more-options-menu hidden">
+                    <ul>
+                        <li id="selectChatsBtn"><i class="fas fa-check-square"></i> Select Chats</li>
+                        <li id="settingsBtn"><i class="fas fa-gear"></i> Settings</li>
+                        <li id="logoutBtn" class="danger"><i class="fas fa-sign-out-alt"></i> Logout</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" class="search-input" id="chatSearchInput" placeholder="Search chats...">
+            </div>
+
+            <div class="chat-list" id="chatList">
+                <!-- Chat items will be dynamically loaded here -->
+                <!-- Template for chat items (hidden, will be cloned) -->
+                <div class="chat-item hidden" id="chatItemTemplate">
+                    <div class="chat-select-container">
+                        <input type="checkbox" class="chat-select-checkbox">
+                    </div>
+                    <div class="chat-avatar"></div>
+                    <div class="chat-info">
+                        <div class="chat-name">
+                            <span></span>
+                            <span class="status-indicator"></span>
+                        </div>
+                        <div class="chat-preview"></div>
+                    </div>
+                    <div class="chat-meta">
+                        <span class="chat-time"></span>
+                        <span class="unread-badge hidden"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Selected Chats Button -->
+            <button class="delete-selected-btn" id="deleteSelectedChatsBtn" style="display: none;">
+                <i class="fas fa-trash-alt"></i> Delete Selected
+            </button>
+        </div>
+
+        <!-- New Chat Modal - Still a modal, as it's a minor interaction -->
+        <div id="newChatModal" class="modal-overlay hidden">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Start a New Chat</h3>
+                    <button class="close-btn" id="closeNewChatModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-search-bar">
+                    <input type="text" class="modal-search-input" id="modalSearchUsers" placeholder="Search users by name or email...">
+                </div>
+                <div class="user-list" id="modalUserList">
+                    <!-- Users will be dynamically loaded here -->
+                    <p style="text-align: center; color: #64748b; padding: 20px;">Loading users...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generic Context Menu (Shared across pages) -->
+        <div id="contextMenu" class="context-menu hidden">
+            <ul>
+                <!-- Options populated dynamically -->
+            </ul>
+        </div>
+
+        <!-- Profile View Modal (for other users, managed by app.js) -->
+        <div id="profileViewModal" class="modal-overlay hidden profile-view-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">User Profile</h3>
+                    <button class="close-btn" id="closeProfileViewModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="profile-avatar" id="profileAvatar"></div>
+                <h2 class="profile-name" id="profileName"></h2>
+                <p class="profile-email" id="profileEmail"></p>
+                <div class="profile-info-item"><i class="fas fa-circle"></i> <span id="profileStatus"></span></div>
+                <div class="profile-info-item"><i class="fas fa-quote-right"></i> <span id="profileStatusMessage"></span></div>
+                <div class="profile-info-item"><i class="fas fa-calendar-alt"></i> Joined: <span id="profileJoined"></span></div>
+                <div class="profile-actions"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Firebase SDKs (compat version for global firebase namespace) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script> <!-- ADDED STORAGE SDK -->
+    <!-- Main application logic for index.html -->
+    <script src="app.js" defer></script>
+    <script src="dots.js" defer></script> <!-- New script for menu logic -->
+</body>
+</html>

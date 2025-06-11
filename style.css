@@ -1,0 +1,1775 @@
+/*
+ * style.css
+ * This file contains the main styling for the Chat Some application,
+ * including global theme variables, base layouts, and component-specific styles.
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Body Styles */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh; /* Ensure background fills viewport height */
+    overflow: hidden; /* Prevent body scroll, app-container will handle content */
+    display: flex; /* Use flex to center app-container */
+    justify-content: center;
+    align-items: center;
+
+    /* --- Default Theme (Light Theme Variables) --- */
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --app-bg: rgba(255, 255, 255, 0.95);
+    --sidebar-bg: #f8fafc;
+    --sidebar-border: #e2e8f0;
+    --header-bg-gradient-start: #667eea;
+    --header-bg-gradient-end: #764ba2;
+    --header-text-color: white;
+    --search-bg: white;
+    --search-border: #e2e8f0;
+    --search-focus-border: #667eea;
+    --chat-item-bg-hover: #f8fafc;
+    --chat-item-border: #f1f5f9;
+    --chat-item-active-bg: #e0e7ff;
+    --chat-item-active-border: #667eea;
+    --chat-name-color: #1e293b;
+    --chat-preview-color: #64748b;
+    --chat-time-color: #94a3b8;
+    --unread-badge-bg: #667eea;
+    --unread-badge-color: white;
+    --chat-area-bg: #ffffff;
+    --chat-messages-bg-start: #f8fafc;
+    --chat-messages-bg-end: #ffffff;
+    --message-received-bg: white;
+    --message-received-color: #1e293b;
+    --message-received-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --message-sent-bg-start: #667eea;
+    --message-sent-bg-end: #764ba2;
+    --message-sent-color: white;
+    --message-time-opacity: 0.7;
+    --chat-input-bg: white;
+    --input-container-bg: #f8fafc;
+    --input-container-border: #e2e8f0;
+    --input-container-focus-border: #667eea;
+    --message-input-color: #1e293b;
+    --send-btn-bg-start: #667eea;
+    --send-btn-bg-end: #764ba2;
+    --send-btn-color: white;
+    --modal-bg: white;
+    --modal-header-color: #1e293b;
+    --close-btn-color: #64748b;
+    --user-item-bg-hover: #f8fafc;
+    --user-item-border: #e2e8f0;
+    --user-details-title-color: #1e293b;
+    --user-details-text-color: #64748b;
+    --status-online: #10b981; /* Green */
+    --status-away: #f59e0b; /* Orange */
+    --status-offline: #6b7280; /* Gray */
+    --typing-indicator-bg: #f1f5f9;
+    --typing-indicator-color: #64748b;
+    --typing-dot-color: #94a3b8;
+    --date-separator-bg-start: #f8fafc;
+    --date-separator-bg-end: #ffffff;
+    --date-separator-color: #94a3b8;
+    --date-separator-line: #e2e8f0;
+    --chat-options-menu-bg: white;
+    --chat-options-menu-item-color: #334155;
+    --chat-options-menu-item-hover: #f1f5f9;
+    --chat-options-menu-item-icon: #64748b;
+    --context-menu-bg: white;
+    --context-menu-item-color: #334155;
+    --context-menu-item-hover: #f1f5f9;
+    --context-menu-item-icon: #64748b;
+    --danger-color: #ef4444;
+    --profile-info-color: #475569;
+    --profile-info-icon-color: #667eea;
+    --profile-action-primary-bg-start: #667eea;
+    --profile-action-primary-bg-end: #764ba2;
+    --profile-action-primary-color: white;
+    --profile-action-secondary-bg: #e2e8f0;
+    --profile-action-secondary-color: #334155;
+    --profile-action-secondary-hover-bg: #cbd5e1;
+    --profile-action-danger-bg: #fef2f2;
+    --profile-action-danger-color: #ef4444;
+    --profile-action-danger-border: #fca5a5;
+    --profile-action-danger-hover-bg: #fee2e2;
+    --settings-input-bg: #f8fafc;
+    --settings-input-border: #e2e8f0;
+    --settings-input-focus-border: #667eea;
+    --save-btn-bg: #28a745;
+    --save-btn-color: white;
+    --save-btn-hover-bg: #218838;
+    --edited-label-color: #94a3b8;
+    --delete-selected-btn-bg: #ef4444;
+    --delete-selected-btn-color: white;
+    --delete-selected-btn-hover: #dc2626;
+    --checkbox-border: #94a3b8;
+    --checkbox-checked-bg: #667eea;
+    --checkbox-checked-border: #667eea;
+    --message-selected-bg: rgba(102, 126, 234, 0.1); /* light blue for selected messages */
+}
+
+/* --- Dark Theme Variables --- */
+body.dark-theme {
+    --bg-gradient-start: #1a202c;
+    --bg-gradient-end: #2d3748;
+    --app-bg: rgba(45, 55, 72, 0.95);
+    --sidebar-bg: #1a202c;
+    --sidebar-border: #2d3748;
+    --header-bg-gradient-start: #1a202c;
+    --header-bg-gradient-end: #2d3748;
+    --header-text-color: #e2e8f0;
+    --search-bg: #2d3748;
+    --search-border: #4a5568;
+    --search-focus-border: #667eea;
+    --chat-item-bg-hover: #2d3748;
+    --chat-item-border: #2d3744;
+    --chat-item-active-bg: #4a5568;
+    --chat-item-active-border: #667eea;
+    --chat-name-color: #e2e8f0;
+    --chat-preview-color: #a0aec0;
+    --chat-time-color: #718096;
+    --unread-badge-bg: #667eea;
+    --unread-badge-color: white;
+    --chat-area-bg: #2d3748;
+    --chat-messages-bg-start: #2d3748;
+    --chat-messages-bg-end: #2d3748;
+    --message-received-bg: #4a5568;
+    --message-received-color: #e2e8f0;
+    --message-received-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --message-sent-bg-start: #667eea;
+    --message-sent-bg-end: #764ba2;
+    --message-sent-color: white;
+    --message-time-opacity: 0.7;
+    --chat-input-bg: #1a202c;
+    --input-container-bg: #2d3748;
+    --input-container-border: #4a5568;
+    --input-container-focus-border: #667eea;
+    --message-input-color: #e2e8f0;
+    --send-btn-bg-start: #667eea;
+    --send-btn-bg-end: #764ba2;
+    --send-btn-color: white;
+    --modal-bg: #2d3748;
+    --modal-header-color: #e2e8f0;
+    --close-btn-color: #a0aec0;
+    --user-item-bg-hover: #4a5568;
+    --user-item-border: #2d3748;
+    --user-details-title-color: #e2e8f0;
+    --user-details-text-color: #a0aec0;
+    --status-online: #10b981; /* Green */
+    --status-away: #f59e0b; /* Orange */
+    --status-offline: #6b7280; /* Gray */
+    --typing-indicator-bg: #4a5568;
+    --typing-indicator-color: #e2e8f0;
+    --typing-dot-color: #a0aec0;
+    --date-separator-bg-start: #2d3748;
+    --date-separator-bg-end: #2d3748;
+    --date-separator-color: #a0aec0;
+    --date-separator-line: #4a5568;
+    --chat-options-menu-bg: #2d3748;
+    --chat-options-menu-item-color: #e2e8f0;
+    --chat-options-menu-item-hover: #4a5568;
+    --chat-options-menu-item-icon: #a0aec0;
+    --context-menu-bg: #2d3748;
+    --context-menu-item-color: #e2e8f0;
+    --context-menu-item-hover: #4a5568;
+    --context-menu-item-icon: #a0aec0;
+    --danger-color: #fca5a5;
+    --profile-info-color: #a0aec0;
+    --profile-info-icon-color: #667eea;
+    --profile-action-primary-bg-start: #667eea;
+    --profile-action-primary-bg-end: #764ba2;
+    --profile-action-primary-color: white;
+    --profile-action-secondary-bg: #4a5568;
+    --profile-action-secondary-color: #e2e8f0;
+    --profile-action-secondary-hover-bg: #6b7280;
+    --profile-action-danger-bg: #4a0000;
+    --profile-action-danger-color: #fca5a5;
+    --profile-action-danger-border: #fca5a5;
+    --profile-action-danger-hover-bg: #6a0000;
+    --settings-input-bg: #4a5568;
+    --settings-input-border: #6b7280;
+    --settings-input-focus-border: #667eea;
+    --save-btn-bg: #1e7e34;
+    --save-btn-color: white;
+    --save-btn-hover-bg: #155d28;
+    --edited-label-color: #718096;
+    --delete-selected-btn-bg: #dc2626;
+    --delete-selected-btn-color: white;
+    --delete-selected-btn-hover: #b91c1c;
+    --checkbox-border: #a0aec0;
+    --checkbox-checked-bg: #667eea;
+    --checkbox-checked-border: #667eea;
+    --message-selected-bg: rgba(102, 126, 234, 0.2); /* slightly darker blue for selected messages */
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+}
+
+/* App Container (this wraps the main UI content on any page) */
+.app-container {
+    display: flex;
+    height: calc(100vh - 40px); /* Account for 20px margin top/bottom */
+    max-width: 1400px; /* Max width for desktop */
+    width: calc(100% - 40px); /* Account for 20px margin on each side */
+    margin: 20px; /* Consistent margin around the app */
+    background: var(--app-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    overflow: hidden; /* Keep content within rounded corners */
+    position: relative; /* For auth screen overlay */
+}
+
+/* Auth Screen (used only on login.html) */
+.auth-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Take full height of its parent (app-container) */
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+.auth-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    width: 100%;
+}
+
+.auth-logo img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.auth-subtitle {
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: #667eea;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.auth-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.auth-separator {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.auth-separator::before,
+.auth-separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.auth-separator span {
+    padding: 0 10px;
+}
+
+.google-signin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.google-signin-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.google-signin-btn .fab {
+    font-size: 1.2em;
+}
+
+
+/* Changed to button for better accessibility */
+.auth-switch {
+    opacity: 0.8;
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 0;
+}
+
+/* Sidebar (this is the main view on index.html) */
+.sidebar {
+    width: 350px; /* Default desktop width */
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+.sidebar-header {
+    padding: 20px;
+    background: linear-gradient(135deg, var(--header-bg-gradient-start) 0%, var(--header-bg-gradient-end) 100%);
+    color: var(--header-text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* For more options menu */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer; /* To open profile modal */
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 16px;
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+.header-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--header-text-color);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 18px; /* Slightly larger for better touch target */
+}
+/* Specific icon-btn for chat header on chat.html needs to match app theme */
+body.light-theme .chat-area .header-actions .icon-btn {
+    color: #334155; /* Dark text for light header */
+}
+body.dark-theme .chat-area .header-actions .icon-btn {
+    color: #e2e8f0; /* Light text for dark header */
+}
+
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-bar {
+    padding: 20px;
+    background: var(--search-bg);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--search-border);
+    border-radius: 25px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--search-bg); /* Ensure input background matches search bar */
+    color: var(--chat-name-color); /* Text color */
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--search-focus-border);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.search-input::placeholder {
+    color: var(--chat-preview-color);
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+    position: relative; /* For delete selected button */
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--chat-item-border);
+}
+
+.chat-item:hover {
+    background: var(--chat-item-bg-hover);
+}
+
+.chat-item.active {
+    background: var(--chat-item-active-bg);
+    border-right: 3px solid var(--chat-item-active-border);
+}
+
+.chat-item.selected {
+    background: var(--chat-item-active-bg); /* Highlight selected chats */
+}
+
+
+.chat-select-container {
+    margin-right: 15px; /* Space between checkbox and avatar */
+    display: none; /* Hidden by default, shown in select mode */
+    flex-shrink: 0;
+}
+.chat-select-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid var(--checkbox-border);
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat-select-checkbox:checked {
+    background-color: var(--checkbox-checked-bg);
+    border-color: var(--checkbox-checked-border);
+}
+.chat-select-checkbox:checked::before {
+    content: "\2713"; /* Checkmark icon */
+    font-size: 14px;
+    color: white;
+}
+
+
+.chat-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-right: 15px;
+    position: relative; /* For status indicator positioning */
+    flex-shrink: 0; /* Prevent avatar from shrinking */
+    cursor: pointer; /* To open profile modal */
+}
+
+.chat-info {
+    flex: 1;
+    min-width: 0; /* Allow text to truncate */
+}
+
+.chat-name {
+    font-weight: 600;
+    color: var(--chat-name-color);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-preview {
+    font-size: 14px;
+    color: var(--chat-preview-color);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat-meta {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: fit-content; /* Prevent time/badge from wrapping */
+    margin-left: 10px; /* Space from chat info */
+}
+
+.chat-time {
+    font-size: 12px;
+    color: var(--chat-time-color);
+}
+
+.unread-badge {
+    background: var(--unread-badge-bg);
+    color: var(--unread-badge-color);
+    border-radius: 50%;
+    min-width: 20px; /* Use min-width for larger numbers */
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 0 6px; /* Add padding for larger numbers */
+    margin-left: auto; /* Push badge to right */
+}
+
+/* Main Chat Area (this is the main view on chat.html) */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--chat-area-bg);
+}
+
+/* Chat background theme (example) */
+.chat-messages.theme-gradient {
+    background: linear-gradient(180deg, #e0f2f7 0%, #ffffff 100%); /* Lighter blue gradient */
+}
+.chat-messages.theme-dark {
+    background: #2d3748; /* Dark background */
+    color: #e2e8f0;
+}
+.chat-messages.theme-dark .message.received .message-bubble {
+    background: #4a5568;
+    color: #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.chat-messages.theme-dark .message.received .message-time {
+    color: rgba(226, 232, 240, 0.7);
+}
+.chat-messages.theme-dark .typing-indicator {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+.chat-messages.theme-dark .typing-dot {
+    background: #a0aec0;
+}
+.chat-messages.theme-dark .date-separator span {
+     background: #2d3748;
+     color: #a0aec0;
+}
+.chat-messages.theme-dark .date-separator::before {
+    background: #4a5568;
+}
+
+.welcome-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--chat-preview-color);
+    text-align: center;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.chat-header {
+    padding: 20px;
+    background: var(--chat-area-bg);
+    border-bottom: 1px solid var(--sidebar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    position: relative; /* For chat options menu */
+}
+
+.chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer; /* Make entire info area clickable */
+}
+
+.chat-header-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    flex-shrink: 0;
+    position: relative; /* For status indicator */
+}
+
+.chat-header-details h3 {
+    color: var(--chat-name-color);
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-header-details p {
+    font-size: 14px;
+    color: var(--chat-preview-color);
+}
+
+.chat-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0; /* Important for flex children to allow scroll */
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: linear-gradient(180deg, var(--chat-messages-bg-start) 0%, var(--chat-messages-bg-end) 100%);
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack messages vertically */
+}
+
+.message {
+    display: flex;
+    margin-bottom: 16px;
+    animation: messageSlide 0.3s ease-out;
+    position: relative; /* For selected state */
+    transition: background-color 0.2s ease-in-out;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.selected {
+    background-color: var(--message-selected-bg);
+    border-radius: 8px;
+}
+.message.sent.selected {
+    margin-left: -5px; /* Adjust margin to include checkbox without shifting bubble */
+    padding-left: 5px;
+}
+.message.received.selected {
+    margin-right: -5px;
+    padding-right: 5px;
+}
+
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message-bubble {
+    max-width: 70%;
+    padding: 12px 18px;
+    border-radius: 18px;
+    position: relative;
+    word-wrap: break-word; /* Ensure long words break */
+    display: flex;
+    flex-direction: column;
+}
+
+.message.received .message-bubble {
+    background: var(--message-received-bg);
+    color: var(--message-received-color);
+    box-shadow: var(--message-received-shadow);
+}
+
+.message.sent .message-bubble {
+    background: linear-gradient(135deg, var(--message-sent-bg-start) 0%, var(--message-sent-bg-end) 100%);
+    color: white; /* Always white for sent */
+}
+.message.sent .message-bubble a {
+    color: rgba(255, 255, 255, 0.9); /* Lighter links on sent messages */
+}
+.message.received .message-bubble a {
+    color: var(--message-received-color); /* Inherit for received links */
+    text-decoration: underline;
+}
+
+
+.message-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align time and status to right */
+    gap: 8px; /* Space between time and status */
+    margin-top: 4px;
+    width: 100%;
+}
+
+.message-time {
+    font-size: 11px;
+    opacity: var(--message-time-opacity);
+    /* For received messages, time should align left within the bubble */
+    text-align: left; /* Default, will be overridden for sent */
+}
+.message.sent .message-time {
+    text-align: right; /* Override for sent messages */
+}
+
+.message-meta .fa-star {
+    color: gold; /* Starred message color */
+    font-size: 0.9em;
+}
+.edited-label {
+    font-size: 0.75em;
+    opacity: 0.8;
+    color: var(--edited-label-color);
+    margin-left: 5px;
+    white-space: nowrap;
+}
+
+/* File/Media display styles */
+.message-media-image, .message-media-video, .message-media-audio {
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 8px; /* Space between media and caption/meta */
+}
+.message-media-image {
+    max-height: 250px; /* Limit height of images */
+    object-fit: contain; /* Ensure full image is visible */
+}
+.message-media-video, .message-media-audio {
+    width: 100%; /* Take full width of bubble */
+}
+.message-media-document {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.2); /* Slightly different background for documents */
+    border-radius: 8px;
+    color: inherit;
+    text-decoration: none;
+    word-break: break-all; /* Break long file names */
+}
+.message.sent .message-media-document {
+    background: rgba(255, 255, 255, 0.2); /* Light background for sent docs */
+}
+.message.received .message-media-document {
+    background: rgba(0, 0, 0, 0.05); /* Lighter background for received docs */
+}
+.message-media-document a {
+    color: inherit; /* Inherit color from bubble */
+    text-decoration: underline;
+}
+.message-media-document .fa-file-alt {
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.8); /* Icon color */
+}
+.message.received .message-media-document .fa-file-alt {
+    color: var(--message-received-color);
+    opacity: 0.7;
+}
+
+/* Uploading message style */
+.message.uploading-message .message-bubble {
+    background: #ccc; /* Grey background for uploading messages */
+    color: #333;
+    box-shadow: none;
+    border: 1px dashed #999;
+}
+.message.uploading-message .upload-progress-bar {
+    height: 4px;
+    background-color: #667eea;
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.3s ease-in-out;
+    margin-top: 5px;
+}
+.message.uploading-message .upload-text {
+    font-size: 0.9em;
+    color: #555;
+}
+
+
+/* Message selection checkbox */
+.message-select-container {
+    margin: auto 10px auto 0; /* Space between checkbox and message bubble */
+    display: none; /* Hidden by default */
+    flex-shrink: 0;
+    width: 20px; /* Ensure consistent width */
+    height: 20px;
+}
+.message-select-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid var(--checkbox-border);
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.message-select-checkbox:checked {
+    background-color: var(--checkbox-checked-bg);
+    border-color: var(--checkbox-checked-border);
+}
+.message-select-checkbox:checked::before {
+    content: "\2713"; /* Checkmark icon */
+    font-size: 14px;
+    color: white;
+}
+
+
+.chat-input {
+    padding: 20px;
+    background: var(--chat-input-bg);
+    border-top: 1px solid var(--sidebar-border);
+    flex-shrink: 0; /* Prevent input area from shrinking */
+    position: sticky; /* Make it fixed to bottom */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--input-container-bg);
+    border-radius: 25px;
+    padding: 12px 20px;
+    border: 2px solid var(--input-container-border);
+    transition: all 0.2s ease;
+}
+
+.input-container:focus-within {
+    border-color: var(--input-container-focus-border);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.message-input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-size: 16px;
+    color: var(--message-input-color);
+    resize: none; /* Disable textarea resize handle */
+    min-height: 20px; /* Ensure at least one line */
+    max-height: 100px; /* Limit height to prevent excessive scrolling */
+    overflow-y: auto; /* Enable scroll if content exceeds max-height */
+}
+
+.message-input:focus {
+    outline: none;
+}
+
+.send-btn {
+    background: linear-gradient(135deg, var(--send-btn-bg-start) 0%, var(--send-btn-bg-end) 100%);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none; /* No hover effect when disabled */
+}
+/* For attach/emoji buttons inside input */
+.chat-input .icon-btn {
+    font-size: 1.2em; /* Slightly larger than header icon-btn */
+    padding: 0; /* Remove padding inherited from general icon-btn */
+    width: 30px; /* Fixed width */
+    height: 30px; /* Fixed height */
+    color: var(--chat-preview-color); /* Greyish color for icons in input */
+}
+.chat-input .icon-btn:hover {
+    background: none;
+    color: var(--chat-name-color); /* Darker on hover */
+}
+
+
+/* Modals (New Chat, Profile View) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: var(--modal-bg);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: var(--chat-name-color);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--modal-header-color);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--close-btn-color);
+}
+
+.modal-search-bar {
+    padding-bottom: 20px;
+    background: var(--modal-bg); /* Ensure it matches modal background */
+    border-bottom: 1px solid var(--sidebar-border); /* Separator */
+    margin-bottom: 15px; /* Space from user list */
+}
+
+.modal-search-input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid var(--search-border); /* Using search-border for consistency */
+    border-radius: 25px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--search-bg); /* Use search-bg for consistency */
+    color: var(--chat-name-color);
+}
+
+.modal-search-input:focus {
+    outline: none;
+    border-color: var(--search-focus-border);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.modal-search-input::placeholder {
+    color: var(--chat-preview-color);
+}
+
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.user-item:hover {
+    background: var(--user-item-bg-hover);
+    border-color: var(--user-item-border);
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    margin-right: 15px;
+    position: relative; /* For status indicator positioning */
+    flex-shrink: 0;
+    cursor: pointer; /* To open profile modal */
+}
+
+.user-details h4 {
+    color: var(--user-details-title-color);
+    margin-bottom: 2px;
+}
+
+.user-details p {
+    font-size: 14px;
+    color: var(--user-details-text-color);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Design (Mobile-First overrides) */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+    .app-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh; /* Full viewport height */
+        width: 100vw; /* Full viewport width */
+    }
+
+    /* index.html on mobile: The sidebar becomes the main view */
+    body.index-page .app-container {
+        flex-direction: column; /* Stack header, search, list vertically */
+    }
+    body.index-page .sidebar {
+        width: 100%;
+        border-right: none;
+        transform: translateX(0); /* Always visible */
+        transition: none; /* No transition needed as it's the default state */
+        box-shadow: none;
+    }
+    body.index-page .chat-area { /* Hide chat area if it was present in index.html */
+        display: none;
+    }
+    body.index-page .sidebar-header .mobile-menu-btn { /* Hide hamburger on index page */
+        display: none;
+    }
+    body.index-page .chat-header .back-btn { /* Hide back button on index page */
+        display: none;
+    }
+
+    /* chat.html on mobile: The chat-area becomes the main view */
+    body.chat-page .app-container {
+        flex-direction: column;
+    }
+    body.chat-page .sidebar {
+        display: none; /* Sidebar is hidden on chat.html mobile */
+    }
+    body.chat-page .chat-area {
+        width: 100%;
+        height: 100%; /* Take full height of the app container */
+    }
+    body.chat-page .chat-header .mobile-menu-btn { /* Hide the sidebar toggle on chat page, back button is used */
+        display: none;
+    }
+    body.chat-page .chat-header .back-btn { /* Always show back button on chat page */
+        display: block;
+    }
+
+    /* login.html on mobile */
+    body.login-page .app-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        width: 100vw;
+    }
+    body.login-page .auth-screen {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* New Profile and Settings Pages on Mobile */
+    body.profile-page .app-container,
+    body.settings-page .app-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        width: 100vw;
+        flex-direction: column; /* Ensure full page content */
+    }
+    body.profile-page .profile-content,
+    body.settings-page .settings-content {
+        flex: 1; /* Allow content to grow */
+        overflow-y: auto; /* Enable scrolling if content overflows */
+        padding: 20px; /* Adjust padding for mobile */
+    }
+
+}
+
+/* Desktop overrides for general elements */
+@media (min-width: 769px) {
+    /* Ensure sidebar is always visible on desktop */
+    .sidebar {
+        transform: translateX(0) !important; /* Override mobile transform */
+        transition: none !important; /* No transition */
+    }
+    /* Hide mobile specific buttons on desktop */
+    .mobile-menu-btn, .back-btn {
+        display: none !important;
+    }
+}
+
+
+/* Status indicators */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: relative; /* Changed from absolute for inline use in names */
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px; /* Spacing from name */
+    border: 2px solid white; /* To make it pop on colored background */
+    flex-shrink: 0; /* Prevent indicator from shrinking */
+}
+
+.status-online {
+    background: var(--status-online); /* Green */
+}
+
+.status-away {
+    background: var(--status-away); /* Orange */
+}
+
+.status-offline {
+    background: var(--status-offline); /* Gray */
+}
+
+/* Status indicator for chat item avatar */
+.chat-item .status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+/* Status indicator for chat header avatar */
+.chat-header-info .status-indicator {
+    position: absolute;
+    bottom: 0px; /* Adjust as needed for chat header */
+    right: 0px;
+}
+
+
+/* Typing indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: var(--typing-indicator-bg);
+    border-radius: 18px;
+    margin-bottom: 16px;
+    width: fit-content; /* Only take content width */
+    margin-right: auto; /* Push to left */
+    font-size: 14px;
+    color: var(--typing-indicator-color);
+    align-self: flex-start; /* Align to the start in flex column */
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--typing-dot-color);
+    animation: typing 1.5s infinite;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    30% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Date separator */
+.date-separator {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 12px;
+    color: var(--date-separator-color);
+    position: relative;
+    z-index: 1;
+}
+
+.date-separator span {
+    background: linear-gradient(180deg, var(--date-separator-bg-start) 0%, var(--date-separator-bg-end) 100%);
+    padding: 5px 15px;
+    border: 1px solid #a11ed475; /* A light, soft border */
+    border-radius: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.date-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--date-separator-line);
+    z-index: -1;
+}
+
+/* Chat Options Menu */
+.chat-options-menu, .more-options-menu { /* Combined styles for similar menus */
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    right: 20px;
+    background: var(--chat-options-menu-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    min-width: 180px;
+    z-index: 50; /* Above chat content, below modals */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.chat-options-menu.show, .more-options-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.chat-options-menu ul, .more-options-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-options-menu li, .more-options-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--chat-options-menu-item-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.1s ease;
+}
+
+.chat-options-menu li:hover, .more-options-menu li:hover {
+    background: var(--chat-options-menu-item-hover);
+}
+
+.chat-options-menu li i, .more-options-menu li i {
+    color: var(--chat-options-menu-item-icon);
+}
+
+.chat-options-menu li.danger, .more-options-menu li.danger {
+    color: var(--danger-color);
+}
+.chat-options-menu li.danger i, .more-options-menu li.danger i {
+    color: var(--danger-color);
+}
+
+
+/* Context Menu (for messages / chat items) */
+.context-menu {
+    position: fixed; /* Fixed position relative to viewport */
+    background: var(--context-menu-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    min-width: 150px;
+    z-index: 1000; /* Above everything else */
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    transition: opacity 0.1s ease, transform 0.1s ease, visibility 0.1s;
+    transform-origin: top left; /* Scale from click point */
+}
+
+.context-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.context-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.context-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    color: var(--context-menu-item-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.1s ease;
+}
+
+.context-menu li:hover {
+    background: var(--context-menu-item-hover);
+}
+.context-menu li.danger {
+    color: var(--danger-color);
+}
+.context-menu li.danger i {
+    color: var(--danger-color);
+}
+
+/* Profile View Modal (still used for other users) */
+.profile-view-modal .modal {
+    max-width: 450px;
+    text-align: center;
+    padding: 40px;
+}
+
+.profile-view-modal .modal-header {
+    margin-bottom: 30px;
+}
+
+.profile-view-modal .profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 3rem;
+    margin: 0 auto 20px auto;
+    position: relative;
+}
+
+.profile-view-modal .profile-avatar .status-indicator {
+     /* Adjust status indicator in large avatar */
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    border: 4px solid white; /* Larger border for large avatar */
+}
+
+.profile-view-modal .profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--modal-header-color);
+    margin-bottom: 10px;
+}
+
+.profile-view-modal .profile-email {
+    font-size: 1rem;
+    color: var(--chat-preview-color);
+    margin-bottom: 20px;
+}
+
+.profile-view-modal .profile-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: var(--profile-info-color);
+}
+
+.profile-view-modal .profile-info-item i {
+    color: var(--profile-info-icon-color);
+}
+
+.profile-view-modal .profile-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.profile-view-modal .profile-actions button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.profile-view-modal .profile-actions button.primary {
+    background: linear-gradient(135deg, var(--profile-action-primary-bg-start) 0%, var(--profile-action-primary-bg-end) 100%);
+    color: white;
+}
+.profile-view-modal .profile-actions button.primary:hover {
+    opacity: 0.9;
+}
+.profile-view-modal .profile-actions button.secondary {
+    background: var(--profile-action-secondary-bg);
+    color: var(--profile-action-secondary-color);
+}
+.profile-view-modal .profile-actions button.secondary:hover {
+    background: var(--profile-action-secondary-hover-bg);
+}
+.profile-view-modal .profile-actions button.danger {
+    background: var(--profile-action-danger-bg);
+    color: var(--profile-action-danger-color);
+    border: 1px solid var(--profile-action-danger-border);
+}
+.profile-view-modal .profile-actions button.danger:hover {
+    background: var(--profile-action-danger-hover-bg);
+}
+
+/* Global Settings and Profile Page Specific Styles */
+.settings-page .settings-header,
+.profile-page .profile-header {
+    background: linear-gradient(135deg, var(--header-bg-gradient-start) 0%, var(--header-bg-gradient-end) 100%);
+    color: var(--header-text-color);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.settings-page .settings-header h2,
+.profile-page .profile-header h2 {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.settings-content, .profile-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px; /* Base padding for desktop */
+}
+.setting-section {
+    background: var(--modal-bg);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+.setting-section h3 {
+    color: var(--modal-header-color);
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--sidebar-border);
+    padding-bottom: 10px;
+}
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.setting-item span {
+    font-weight: 600;
+    color: var(--chat-name-color);
+    font-size: 1.1rem;
+}
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.theme-switcher .theme-btn {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--sidebar-border);
+    border-radius: 8px;
+    background: var(--input-container-bg);
+    color: var(--chat-name-color);
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.theme-switcher .theme-btn:hover {
+    background: var(--user-item-bg-hover);
+}
+.theme-switcher .theme-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.theme-switcher .theme-btn.active i {
+    color: white;
+}
+.theme-switcher .theme-btn i {
+    color: var(--chat-options-menu-item-icon);
+}
+
+.setting-item input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--settings-input-border);
+    border-radius: 8px;
+    font-size: 15px;
+    background: var(--settings-input-bg);
+    color: var(--message-input-color);
+}
+.setting-item input[type="text"]:focus {
+    outline: none;
+    border-color: var(--settings-input-focus-border);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+.setting-item input[type="text"]::placeholder {
+    color: var(--chat-preview-color);
+}
+
+.setting-item .save-btn {
+    padding: 10px 20px;
+    background: var(--save-btn-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content; /* Make button only as wide as its content */
+    margin-top: 10px;
+}
+.setting-item .save-btn:hover {
+    background: var(--save-btn-hover-bg);
+}
+
+.settings-logout-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--profile-action-danger-bg);
+    color: var(--profile-action-danger-color);
+    border: 1px solid var(--profile-action-danger-border);
+    margin-top: 20px;
+}
+.settings-logout-btn:hover {
+    background: var(--profile-action-danger-hover-bg);
+}
+
+
+/* Profile Page Specific Styles (integrated from profile.css) */
+.profile-page .profile-content .profile-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 4rem;
+    margin: 20px auto 30px auto;
+}
+.profile-page .profile-content .profile-avatar .status-indicator {
+    width: 24px;
+    height: 24px;
+    bottom: 10px;
+    right: 10px;
+    border: 5px solid white;
+}
+
+.profile-page .profile-content .profile-name {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+.profile-page .profile-content .profile-email {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+.profile-page .profile-content .profile-info-item {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    justify-content: flex-start; /* Align left */
+    gap: 15px;
+}
+.profile-page .profile-content .profile-info-item i {
+    font-size: 1.3em;
+}
+.profile-page .profile-content .profile-actions {
+    margin-top: 40px;
+}
+.profile-page .profile-content .profile-actions button {
+    margin-bottom: 15px;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* New: Delete Selected Button (for both chats and messages) */
+.delete-selected-btn {
+    position: sticky; /* Make it sticky at the bottom */
+    bottom: 20px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    padding: 12px 20px;
+    background-color: var(--delete-selected-btn-bg);
+    color: var(--delete-selected-btn-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 20; /* Ensure it's above other content */
+    display: flex; /* For icon and text centering */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.delete-selected-btn:hover {
+    background-color: var(--delete-selected-btn-hover);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+.delete-selected-btn i {
+    font-size: 1em;
+}
+
+/* Hide the delete selected button on mobile initially, if not desired */
+@media (max-width: 768px) {
+    .delete-selected-btn {
+        bottom: 10px; /* Adjust for smaller screens */
+        width: 180px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}

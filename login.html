@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Some - Login / Sign Up</title> <!-- Updated title -->
+    <!-- Font Awesome for Google icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styles */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f0f2f5; /* A light background for contrast */
+            overflow: hidden; /* Prevent scrollbars due to absolute positioning */
+            min-height: 100vh; /* Ensure body takes full viewport height */
+            display: flex; /* Helps center content if app-container isn't full height */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Add this global box-sizing for consistent layouts */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* App Container */
+        .app-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh; /* Take full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5; /* Fallback for the main app background */
+        }
+
+        /* Auth Screen (used only on login.html) */
+        .auth-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%; /* Take full height of its parent (app-container) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px; /* Base padding for larger screens */
+            position: absolute; /* Position absolutely to cover the whole app container */
+            top: 0;
+            left: 0;
+            z-index: 100; /* Ensure it's on top */
+            transition: opacity 0.5s ease;
+        }
+
+        .auth-screen.hidden {
+            opacity: 0;
+            pointer-events: none; /* Make it unclickable when hidden */
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 40px; /* Base padding for larger screens */
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 100%; /* Ensures it shrinks on smaller screens */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Updated CSS for the Image Logo */
+        .auth-logo {
+            display: flex; /* Use flexbox to center the image */
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px; /* More space below the logo */
+            /* Remove font-size and font-weight as it's an image now */
+        }
+
+        .auth-logo img {
+            width: 120px; /* Adjust size as needed */
+            height: 120px; /* Keep aspect ratio */
+            border-radius: 50%; /* Make it perfectly round */
+            object-fit: cover; /* Ensure image covers the area without distortion */
+            /* Optional: Add a subtle border to match the container design */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* End of new logo CSS */
+
+
+        .auth-title {
+            font-size: 2rem; /* Base font size */
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .auth-subtitle {
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: calc(100% - 30px); /* Adjust for padding */
+            padding: 15px; /* Base padding */
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px; /* Keep 16px for better mobile usability (prevents iOS zooming) */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 15px; /* Base padding */
+            border: none;
+            border-radius: 12px;
+            background: white;
+            color: #667eea;
+            font-size: 16px; /* Base font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .auth-separator {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .auth-separator::before,
+        .auth-separator::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .auth-separator span {
+            padding: 0 10px;
+        }
+
+        .google-signin-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px; /* Base padding */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px; /* Base font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .google-signin-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .google-signin-btn .fab {
+            font-size: 1.2em;
+        }
+
+        /* Changed to button for better accessibility */
+        .auth-switch {
+            opacity: 0.8;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 16px; /* Base font size */
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .auth-message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ffdddd;
+            background: rgba(255, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+        }
+
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 576px) {
+            .auth-screen {
+                padding: 20px;
+            }
+
+            .auth-container {
+                padding: 30px;
+                border-radius: 15px;
+            }
+
+            .auth-logo img {
+                width: 90px; /* Smaller logo on mobile */
+                height: 90px;
+            }
+
+            .auth-title {
+                font-size: 1.8rem;
+            }
+
+            .auth-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 25px;
+            }
+
+            .input-group {
+                margin-bottom: 15px;
+            }
+
+            .input-group input {
+                padding: 12px;
+                font-size: 15px;
+                width: calc(100% - 24px); /* Adjusted for 12px padding */
+            }
+
+            .auth-btn,
+            .google-signin-btn {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .google-signin-btn {
+                gap: 8px;
+            }
+
+            .auth-separator {
+                margin: 15px 0;
+                font-size: 13px;
+            }
+
+            .auth-switch {
+                font-size: 15px;
+                margin-top: 10px;
+            }
+
+            .auth-message {
+                padding: 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Authentication Screen -->
+        <div class="auth-screen" id="authScreen">
+            <div class="auth-container">
+                <div class="auth-logo">
+                    <img src="assets/logo.gif" alt="Chat Some Logo"> <!-- Your logo GIF -->
+                </div>
+                <h2 class="auth-title" id="authTitle">Login to Chat Some</h2> <!-- Updated title text -->
+                <p class="auth-subtitle" id="authSubtitle">
+                    Access your account or create a new one to chat with friends! <!-- Updated subtitle -->
+                </p>
+
+                <div class="auth-form">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                    <div class="input-group" id="confirmPasswordGroup" style="display: none;">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" placeholder="••••••••">
+                    </div>
+
+                    <button class="auth-btn" id="authBtn">Login</button>
+
+                    <div class="auth-message" id="authMessage"></div>
+
+                    <div class="auth-separator"><span>OR</span></div>
+
+                    <button class="google-signin-btn" id="googleSignInBtn">
+                        <i class="fab fa-google"></i> Sign in with Google
+                    </button>
+
+                    <button class="auth-switch" id="authSwitchBtn">
+                        Don't have an account? Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase configuration and main logic -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="login.js"></script>
+</body>
+</html>

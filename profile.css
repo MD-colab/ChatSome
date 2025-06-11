@@ -1,0 +1,205 @@
+/* profile.css (Specific styles for profile.html) */
+
+/* General layout for profile page */
+.profile-page .app-container {
+    flex-direction: column; /* Stack header and content vertically */
+    /* Shared styles from style.css for app-container already apply */
+}
+
+/* Header for profile page */
+.profile-page .profile-header {
+    background: linear-gradient(135deg, var(--header-bg-gradient-start) 0%, var(--header-bg-gradient-end) 100%);
+    color: var(--header-text-color);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0; /* Prevent header from shrinking */
+    width: 100%; /* Take full width of app-container */
+}
+
+.profile-page .profile-header h2 {
+    flex-grow: 1; /* Center the title */
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.profile-page .profile-header .icon-btn {
+    color: var(--header-text-color); /* Ensure consistent color for header icons */
+}
+
+/* Main content area for profile details */
+.profile-page .profile-content {
+    flex: 1; /* Allows content to take available space */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    padding: 30px; /* Base padding for desktop */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    background: var(--chat-area-bg); /* Use chat area background for consistency */
+}
+
+/* Avatar on profile page */
+.profile-page .profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 4rem; /* Larger font size for avatar initials */
+    margin: 20px auto 30px auto; /* Centered with vertical margin */
+    position: relative;
+    flex-shrink: 0;
+}
+
+.profile-page .profile-avatar .status-indicator {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 24px; /* Larger indicator for large avatar */
+    height: 24px;
+    border: 5px solid white; /* Thicker border */
+}
+
+/* Profile name and email */
+.profile-page .profile-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--chat-name-color); /* Use chat name color for names */
+    margin-bottom: 15px;
+}
+
+.profile-page .profile-email {
+    font-size: 1.1rem;
+    color: var(--chat-preview-color);
+    margin-bottom: 25px;
+}
+
+/* Profile info group (status, message, last active, joined) */
+.profile-page .profile-info-group {
+    width: 100%;
+    max-width: 400px; /* Limit width for readability */
+    margin-bottom: 40px;
+    background: var(--modal-bg); /* Background for the info section */
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    text-align: left; /* Align text left within this group */
+}
+
+.profile-page .profile-info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* More space for icons */
+    margin-bottom: 15px;
+    font-size: 1.1rem; /* Slightly larger text */
+    color: var(--profile-info-color); /* Text color */
+}
+
+.profile-page .profile-info-item:last-child {
+    margin-bottom: 0; /* No bottom margin for the last item */
+}
+
+.profile-page .profile-info-item i {
+    color: var(--profile-info-icon-color); /* Icon color */
+    font-size: 1.3em; /* Larger icons */
+    flex-shrink: 0;
+}
+
+/* Profile actions buttons */
+.profile-page .profile-actions {
+    width: 100%;
+    max-width: 400px; /* Match info group width */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profile-page .profile-actions button {
+    width: 100%;
+    padding: 15px; /* Larger padding for buttons */
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1rem; /* Larger font size */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Specific button styles (using general classes from style.css) */
+.profile-page .profile-actions button.primary {
+    background: linear-gradient(135deg, var(--profile-action-primary-bg-start) 0%, var(--profile-action-primary-bg-end) 100%);
+    color: var(--profile-action-primary-color);
+}
+.profile-page .profile-actions button.primary:hover {
+    opacity: 0.9;
+}
+.profile-page .profile-actions button.secondary {
+    background: var(--profile-action-secondary-bg);
+    color: var(--profile-action-secondary-color);
+}
+.profile-page .profile-actions button.secondary:hover {
+    background: var(--profile-action-secondary-hover-bg);
+}
+.profile-page .profile-actions button.danger {
+    background: var(--profile-action-danger-bg);
+    color: var(--profile-action-danger-color);
+    border: 1px solid var(--profile-action-danger-border);
+}
+.profile-page .profile-actions button.danger:hover {
+    background: var(--profile-action-danger-hover-bg);
+}
+
+/* Mobile adjustments (inherited from global style.css) */
+/*
+@media (max-width: 768px) {
+    .profile-page .app-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        width: 100vw;
+    }
+    .profile-page .profile-content {
+        padding: 20px;
+    }
+    .profile-page .profile-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 3rem;
+        margin: 10px auto 20px auto;
+    }
+    .profile-page .profile-avatar .status-indicator {
+        width: 20px;
+        height: 20px;
+        bottom: 8px;
+        right: 8px;
+        border-width: 4px;
+    }
+    .profile-page .profile-name {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    .profile-page .profile-email {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    .profile-page .profile-info-group,
+    .profile-page .profile-actions {
+        max-width: none;
+        width: 100%;
+    }
+    .profile-page .profile-info-item {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    .profile-page .profile-actions button {
+        padding: 12px;
+        font-size: 1rem;
+    }
+}
+*/
