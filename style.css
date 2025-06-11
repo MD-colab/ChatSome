@@ -944,6 +944,7 @@ body.dark-theme .chat-area .header-actions .icon-btn {
     padding: 12px 20px;
     border: 2px solid var(--input-container-border);
     transition: all 0.2s ease;
+    margin-bottom: 40px;
 }
 
 .input-container:focus-within {
